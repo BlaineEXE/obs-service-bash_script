@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# A simple script to run another script from an input argument
+
+# defaults
+SCRIPT=''
+
+USAGE="$(cat <<EOF
+$0 --script <script filename>
+EOF
+)"
+
+while test $# -gt 0; do
+  case $1 in
+    *-script)
+      SCRIPT="$2"
+      shift
+    ;;
+    *)
+      echo Unknown parameter "$1"
+      echo "${USAGE}"
+      exit 1
+    ;;
+  esac
+  shift
+done
+
+function error () {
+  echo "$1"
+  exit 1
+}
+
+if [ -z "${SCRIPT}" ]; then error "No script file specified!"; fi
+if [ ! -f "${SCRIPT}" ]; then error "Script file '${SCRIPT}' does not exist!"; fi
+
+bash "${SCRIPT}"

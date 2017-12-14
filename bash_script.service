@@ -1,0 +1,8 @@
+<service name="bash_script">
+  <summary>Run a bash script.</summary>
+  <description>This service can be used to execute an arbitrary bash script.</description>
+  <parameter name="script">
+    <description>Script to call. This should be a filename with no arguments.</description>
+    <required/>
+  </parameter>
+</service>
